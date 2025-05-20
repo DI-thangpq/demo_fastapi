@@ -1,0 +1,23 @@
+# Môi trường ảo
+venv/
+env/
+
+# File tạm của Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# File cấu hình nhạy cảm
+.env
+
+# File tạm của IDE/Editor
+.vscode/
+.idea/
+
+# File log và file tạm khác
+*.log
+.DS_Store
+
+# File tạm của Alembic (tùy chọn, thường không bỏ qua)
+# migrations/versions/
