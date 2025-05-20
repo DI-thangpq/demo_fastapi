@@ -4,7 +4,7 @@ from alembic import context
 
 # Thêm import
 from app.database import Base, engine
-from app.models import user  # Đảm bảo model User được load
+from app.models import user, post  # Đảm bảo model User được load
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

@@ -1,5 +1,7 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 from app.database import Base
+from sqlalchemy.orm import relationship
+
 from enum import Enum
 
 class Role(str, Enum):
@@ -14,3 +16,4 @@ class User(Base):
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
     role = Column(String, default=Role.USER.value)
+    posts = relationship("Post", back_populates="user")
