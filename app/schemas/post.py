@@ -1,6 +1,5 @@
 from pydantic import BaseModel, Field
 from typing import Optional
-from app.models.user import User  # Import User thay vì Post
 
 class PostBase(BaseModel):
     title: str = Field(..., min_length=1, max_length=100)
@@ -17,7 +16,5 @@ class PostUpdate(PostBase):
 
 class Post(PostBase):
     id: int
-    # user: Optional[User] = None  # Tùy chọn, có thể bỏ nếu không cần trả về user
-
     class Config:
         from_attributes = True

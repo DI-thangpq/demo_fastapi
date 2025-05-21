@@ -2,12 +2,12 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 from app.database import Base
 from sqlalchemy.orm import relationship
 
-class Post(Base):
-    __tablename__ = "posts"
+class Comment(Base):
+    __tablename__ = "comments"
 
     id = Column(Integer, primary_key=True, index=True)
-    title = Column(String, index=True)
     content = Column(String)
+    post_id = Column(Integer, ForeignKey("posts.id"))
     user_id = Column(Integer, ForeignKey("users.id"))
-    user = relationship("User", back_populates="posts")
-    comments = relationship("Comment", back_populates="post")
+    post = relationship("Post", back_populates="comments")
+    user = relationship("User", back_populates="comments")

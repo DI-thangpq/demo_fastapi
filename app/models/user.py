@@ -17,3 +17,4 @@ class User(Base):
     hashed_password = Column(String)
     role = Column(String, default=Role.USER.value)
     posts = relationship("Post", back_populates="user")
+    comments = relationship("Comment", back_populates="user")
