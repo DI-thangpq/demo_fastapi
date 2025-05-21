@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.comment import Comment
 from app.models.post import Post
-from app.schemas.comment import CommentCreate, CommentUpdate
+from app.schemas.comment import CommentCreate, CommentUpdate, CommentPatch
 
 async def create_comment(db:AsyncSession, comment: CommentCreate, current_user_id: int):
     result = await db.execute(select(Post).filter(Post.id == comment.post_id))
@@ -25,13 +25,12 @@ async def get_comment(db: AsyncSession, comment_id: int):
     result = await db.execute(select(Comment).filter(Comment.id == comment_id))
     return result.scalars().first()
 
-async def update_comment(db: AsyncSession, comment_id: int, comment: CommentUpdate, current_user_id: int):
+async def update_comment(db: AsyncSession, comment_id: int, comment: CommentPatch, current_user_id: int):
     db_comment = await get_comment(db, comment_id)
     if db_comment:
         if db_comment.user_id != current_user_id:
             raise ValueError("You can only update your own comments")
-        for key, value in comment.dict(exclude_unset=True).items():
-            setattr(db_comment, key, value)
+        db_comment.content = comment.content
         await db.commit()
         await db.refresh(db_comment)
     return db_comment

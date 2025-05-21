@@ -1,4 +1,3 @@
-
 from pydantic import BaseModel
 
 
@@ -14,7 +13,10 @@ class CommentUpdate(CommentBase):
     content: str | None = None
     post_id: int | None = None
     user_id: int | None = None
-    
+
+class CommentPatch(BaseModel):
+    content: str
+
 class Comment(CommentBase):
     id: int
 
